@@ -68,6 +68,10 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
+      - name: Install all modules to local Maven repository
+        run: mvn clean install -DskipTests
+        working-directory: .
+
       - name: Build backend
         run: mvn clean package -DskipTests
         working-directory: ${{ env.BACKEND_DIR }}
