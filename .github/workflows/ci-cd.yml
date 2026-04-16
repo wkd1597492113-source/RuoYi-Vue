@@ -144,10 +144,4 @@ jobs:
             docker rm ruoyi-vue || true
             
             # 启动新容器
-            docker run -d \
-              --name ruoyi-vue \
-              --network host \
-              -e SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/ry-vue?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=Asia/Shanghai \
-              -e SPRING_DATASOURCE_USERNAME=ruoyi \
-              -e SPRING_DATASOURCE_PASSWORD=ruoyi \
-              ${{ env.IMAGE_NAME }}:latest
+            docker run -d --name ruoyi-vue --network host -e SPRING_DATASOURCE_URL="jdbc:mysql://localhost:3306/ry-vue?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=Asia/Shanghai" -e SPRING_DATASOURCE_USERNAME=ruoyi -e SPRING_DATASOURCE_PASSWORD=ruoyi ${{ env.IMAGE_NAME }}:latest
