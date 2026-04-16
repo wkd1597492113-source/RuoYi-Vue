@@ -9,15 +9,14 @@ RUN npm run build:prod
 # 阶段二：构建后端
 FROM maven:3.8.6-eclipse-temurin-17 AS backend-builder
 WORKDIR /app
-# 复制所有 Maven 模块
+# 复制所有 Maven 模块（包括源代码）
 COPY pom.xml ./
-COPY ruoyi-common/pom.xml ./ruoyi-common/
-COPY ruoyi-framework/pom.xml ./ruoyi-framework/
-COPY ruoyi-quartz/pom.xml ./ruoyi-quartz/
-COPY ruoyi-generator/pom.xml ./ruoyi-generator/
-COPY ruoyi-system/pom.xml ./ruoyi-system/
-COPY ruoyi-admin/pom.xml ./ruoyi-admin/
-COPY ruoyi-admin/src ./ruoyi-admin/src
+COPY ruoyi-common/ ./ruoyi-common/
+COPY ruoyi-framework/ ./ruoyi-framework/
+COPY ruoyi-quartz/ ./ruoyi-quartz/
+COPY ruoyi-generator/ ./ruoyi-generator/
+COPY ruoyi-system/ ./ruoyi-system/
+COPY ruoyi-admin/ ./ruoyi-admin/
 # 先安装所有子模块到本地仓库，然后构建 ruoyi-admin
 RUN mvn clean install -DskipTests -pl ruoyi-admin -am
 
