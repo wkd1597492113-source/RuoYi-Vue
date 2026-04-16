@@ -17,7 +17,7 @@ jobs:
   # 前端构建
   build-frontend:
     name: Build Frontend
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     
     steps:
       - name: Checkout code
@@ -54,7 +54,7 @@ jobs:
   # 后端构建
   build-backend:
     name: Build Backend
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: build-frontend
     
     steps:
@@ -85,7 +85,7 @@ jobs:
   # 构建并推送 Docker 镜像
   build-and-push-docker:
     name: Build and Push Docker Image
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [build-frontend, build-backend]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     
@@ -124,7 +124,7 @@ jobs:
   # 部署到服务器
   deploy:
     name: Deploy to Server
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: build-and-push-docker
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     
