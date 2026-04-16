@@ -7,7 +7,7 @@ COPY ruoyi-ui/ ./
 RUN npm run build:prod
 
 # 阶段二：构建后端
-FROM maven:3.8.6-eclipse-temurin-11 AS backend-builder
+FROM maven:3.8.6-eclipse-temurin-17 AS backend-builder
 WORKDIR /app
 # 复制所有 Maven 模块
 COPY pom.xml ./
@@ -22,7 +22,7 @@ COPY ruoyi-admin/src ./ruoyi-admin/src
 RUN mvn clean install -DskipTests -pl ruoyi-admin -am
 
 # 阶段三：生产镜像
-FROM eclipse-temurin:11-jre
+FROM eclipse-temurin:17-jre
 WORKDIR /app
 
 # 复制后端 JAR
