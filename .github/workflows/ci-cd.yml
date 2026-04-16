@@ -20,17 +20,6 @@ jobs:
     runs-on: self-hosted
     
     steps:
-      - name: Deploy to production server
-        run: |
-          # 拉取最新镜像
-          docker pull wkd1597492113/ruoyi-vue:latest
-          
-          # 停止旧容器
-          docker stop ruoyi-vue || true
-          docker rm ruoyi-vue || true
-          
-          # 启动新容器
-          docker run -d --name ruoyi-vue --network host -e SPRING_DATASOURCE_URL="jdbc:mysql://localhost:3306/ry-vue?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=Asia/Shanghai" -e SPRING_DATASOURCE_USERNAME=ruoyi -e SPRING_DATASOURCE_PASSWORD=ruoyi wkd1597492113/ruoyi-vue:latest
       - name: Checkout code
         uses: actions/checkout@v4
 
